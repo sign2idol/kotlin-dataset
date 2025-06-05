@@ -1,6 +1,7 @@
 package com.deathgun.dataset
 
-import com.deathgun.dataset.storage.S3ClientProvider
+import com.deathgun.dataset.storage.StorageProvider
+import org.koin.ktor.ext.inject
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.PartData
 import io.ktor.http.content.forEachPart
@@ -15,6 +16,7 @@ import java.net.URLConnection
 import java.util.UUID
 
 fun Application.configureRouting() {
+    val storageProvider by inject<StorageProvider>()
     routing {
         post("/upload") {
             val multipartData = call.receiveMultipart()
@@ -30,7 +32,7 @@ fun Application.configureRouting() {
                     val bytes = part.provider().readRemaining().readByteArray()
 
                     val key = "uploads/$filename"
-                    S3ClientProvider.uploadFile(key, bytes, contentType)
+                    storageProvider.uploadFile(key, bytes, contentType)
                 }
                 part.dispose()
             }

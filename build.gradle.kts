@@ -42,6 +42,8 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml")
     implementation("com.google.firebase:firebase-admin:9.4.3")
     implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
+    implementation("io.insert-koin:koin-ktor:3.5.3")
+    implementation("io.insert-koin:koin-logger-slf4j:3.5.3")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
