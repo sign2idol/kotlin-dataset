@@ -10,7 +10,7 @@ import software.amazon.awssdk.services.s3.S3Configuration
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import java.net.URI
 
-object S3ClientProvider {
+object R2StorageProvider : StorageProvider {
 
     private val dotenv = dotenv {
         ignoreIfMalformed = true
@@ -42,7 +42,7 @@ object S3ClientProvider {
             .build()
     }
 
-    fun uploadFile(key: String, data: ByteArray, contentType: String) {
+    override fun uploadFile(key: String, data: ByteArray, contentType: String) {
         val request = PutObjectRequest.builder()
             .bucket(bucketName)
             .key(key)
